@@ -1,0 +1,189 @@
+:root {
+    --cell-size: 50px; /* Updated with JS */
+    --cell-line-height: var(--cell-size);
+    --fill-in-font-size: calc(var(--cell-size) / 2);
+    --outline-width: calc(var(--cell-size) / 25);
+    --big-outline-width: calc(var(--cell-size) / 2);
+    --accent-color: rgb(255, 144, 59);
+    font-family: Arial, Helvetica, sans-serif;
+    scroll-behavior: smooth;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-image: url("background.jpg");
+    background-size: cover;
+}
+
+header {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 100vh;
+    gap: 6vw;
+    padding: 6rem 6vw;
+    color: white;
+}
+
+header h1 {
+    font-size: 7vw;
+}
+
+
+.info {
+    font-size: 1.1rem;
+}
+
+.info h2 {
+    color: var(--accent-color);
+}
+
+.content-link {
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: content-link-idle 1s infinite alternate;
+}
+
+@keyframes content-link-idle {
+    0% {
+        transform: translateX(-50%) translateY(0);
+    }
+    100% {
+        transform: translateX(-50%) translateY(-1rem);
+    }
+}
+
+.content-link img {
+    height: 5rem;
+}
+
+@media screen and (max-width: 1000px) {
+    header {
+        flex-direction: column;
+        padding-top: 0;
+        gap: 0;
+    }
+
+    header h1 {
+        margin-block-start: 2rem;
+        font-size: 3.5rem;
+    }    
+}
+
+.content {
+    display: grid;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.crossword-container {
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    max-height: 85vh;
+    max-width: 85vw;
+    aspect-ratio: 3/2;
+}
+
+
+.crossword-section {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+}
+
+.crossword-section :before {
+    z-index: -1;
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    outline: var(--big-outline-width) solid white;
+}
+
+.crossword-section:nth-child(1) {
+    grid-column: 2 / span 2;
+}
+
+.crossword-section:nth-child(2) {
+    grid-column: 1 / span 2;
+    grid-row-start: 2;
+}
+
+.crossword-cell {
+    position: relative;
+    aspect-ratio: 1;
+    background-color: white;
+    outline: var(--outline-width) solid black;
+    outline-offset: calc(var(--outline-width) / -2);
+}
+
+@supports (-moz-appearance:none) {
+    .crossword-cell {
+        outline: none;
+        outline-offset: 0;
+        border: var(--outline-width) solid black;
+        margin: calc(var(--outline-width) / -2);
+    }
+}
+
+.dual-cell-top {
+    height: calc(50% - var(--outline-width) / 2);
+    border-bottom: var(--outline-width) solid black;
+}
+
+.dual-cell-bottom {
+    height: calc(50% - var(--outline-width) / 2);
+}
+
+.crossword-cell img, svg {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.crossword-cell textarea {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    resize: none;
+    background-color: rgba(20,20,50,0);
+    outline: none;
+    border: none;
+    
+    text-align: center;
+    font-size: var(--fill-in-font-size);
+    line-height: var(--cell-line-height);
+    overflow: hidden;
+    text-transform: uppercase;
+
+    transition: background-color 0.1s;
+}
+
+.crossword-cell textarea:hover {
+    background-color: rgba(20,20,50,0.2);
+}
+
+.solution-cell {
+    background-color: #a7a8b3;
+}
