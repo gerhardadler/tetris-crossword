@@ -7,6 +7,8 @@
     --accent-color: rgb(255, 144, 59);
     font-family: Arial, Helvetica, sans-serif;
     scroll-behavior: smooth;
+    color: white;
+
 }
 
 a {
@@ -15,56 +17,35 @@ a {
 }
 
 body {
-    min-height: 100vh;
     margin: 0;
-    padding: 0;
     background-image: url("background.jpg");
     background-size: cover;
 }
 
-header {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    width: 100%;
-    min-height: 100vh;
-    gap: 6vw;
-    padding: 6rem 6vw;
-    color: white;
+.content {
+    margin: 0 auto;
+    width: fit-content;
+    padding: 0 6vw;
 }
 
-header h1 {
-    font-size: 7vw;
+h1 {
+    font-size: calc(var(--cell-size) * 1.26);
 }
 
-
-.info {
-    font-size: 1.1rem;
-}
-
-.info h2 {
+h2 {
     color: var(--accent-color);
 }
 
-.content-link {
-    position: absolute;
-    width: fit-content;
-    height: fit-content;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: content-link-idle 1s infinite alternate;
+p {
+    font-size: 1.1rem;
+    max-width: 75ch;
 }
 
-@keyframes content-link-idle {
-    0% {
-        transform: translateX(-50%) translateY(0);
-    }
-    100% {
-        transform: translateX(-50%) translateY(-1rem);
+@media screen and (min-width: 75ch) {}
+
+@media screen and (max-width: 500px) {
+    p {
+        font-size: 0.9rem;
     }
 }
 
@@ -72,27 +53,8 @@ header h1 {
     height: 5rem;
 }
 
-@media screen and (max-width: 1000px) {
-    header {
-        flex-direction: column;
-        padding-top: 0;
-        gap: 0;
-    }
-
-    header h1 {
-        margin-block-start: 2rem;
-        font-size: 3.5rem;
-    }    
-}
-
-.content {
-    display: grid;
-    width: 100%;
-    min-height: 100vh;
-}
-
 .crossword-container {
-    margin: auto;
+    margin: 4rem var(--big-outline-width);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
