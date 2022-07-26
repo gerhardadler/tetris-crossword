@@ -71,7 +71,7 @@ p {
     grid-template-rows: repeat(5, 1fr);
 }
 
-.crossword-section :before {
+.crossword-section::before {
     z-index: -1;
     position: absolute;
     content: "";
@@ -129,7 +129,7 @@ p {
     padding: 0;
     margin: 0;
     resize: none;
-    background-color: rgba(20,20,50,0);
+    background-color: transparent;
     outline: none;
     border: none;
     
@@ -140,10 +140,6 @@ p {
     text-transform: uppercase;
 
     transition: background-color 0.1s;
-}
-
-.crossword-cell textarea:hover {
-    background-color: rgba(20,20,50,0.2);
 }
 
 .solution-cell {
