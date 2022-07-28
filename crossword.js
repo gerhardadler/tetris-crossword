@@ -270,7 +270,10 @@ for (const editcell of EDITCELLS) {
         }
         switch (checkIfSolved()) {
             case "solved": 
-                console.log("hey")
+                const solution_cells = document.getElementsByClassName("solution-cell")
+                for (const solution_cell of solution_cells) {
+                    solution_cell.classList.add("solution-cell", "solution-cell-solved") // Replace doesn't work for some reason?
+                }
                 break
             case "fully_solved":
                 const popup = document.getElementById("popup")

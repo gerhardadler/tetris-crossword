@@ -141,7 +141,11 @@ h1 {
 }
 
 .solution-cell {
-    background-color: #a7a8b3;
+    background-color: rgb(167, 168, 179);
+}
+
+.solution-cell-solved {
+    background-color: rgb(139, 212, 135);
 }
 
 #popup {
