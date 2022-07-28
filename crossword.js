@@ -217,13 +217,13 @@ for (const editcell of EDITCELLS) {
         }
     })
     editcell.element.addEventListener("keydown", (event) => {
-        const key = event.key.toUpperCase()
-        event.preventDefault()
+        key = event.key
+        // event.preventDefault()
         const direction = {
-            "ARROWLEFT": [-1, 0],
-            "ARROWRIGHT": [1, 0],
-            "ARROWUP": [0, -1],
-            "ARROWDOWN": [0, 1]
+            "ArrowLeft": [-1, 0],
+            "ArrowRight": [1, 0],
+            "ArrowUp": [0, -1],
+            "ArrowDown": [0, 1]
         }[key]
         if (direction) {
             const adjacent_cell = editcell.getRelatedCell(direction[0], direction[1])
@@ -232,7 +232,7 @@ for (const editcell of EDITCELLS) {
                 return
             }
         }
-        if (key === "BACKSPACE") {
+        if (key === "Backspace") {
             if (editcell.element.value === "") {
                 if (WRITE_DIRECTION === "row") {
                     const prev_row = editcell.prevCellRow()
@@ -252,10 +252,15 @@ for (const editcell of EDITCELLS) {
                 return
             }
         }
+    })
+    editcell.element.addEventListener("input", (event) => {
+        event.preventDefault()
+        const key = event.data.toUpperCase()
         if (!/^[A-Z]$/.test(key)) {
+            editcell.element.value = ""
             return
         }
-        editcell.element.value = key
+        editcell.element.value = key.toUpperCase()
 
         if (WRITE_DIRECTION === "row") {
             const next_row = editcell.nextCellRow()
@@ -281,7 +286,6 @@ for (const editcell of EDITCELLS) {
                 popup.style.opacity = "1"
                 break    
         }
-
     })
 }
 
