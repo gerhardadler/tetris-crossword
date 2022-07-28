@@ -1,23 +1,25 @@
 class Textarea {
-    constructor(element, x, y) {
+    constructor(element, x, y, solution, is_solution_cell) {
         this.element = element
         this.x = x
         this.y = y
+        this.solution = solution
+        this.is_solution_cell = is_solution_cell
         
         this.is_row_selected = false
         this.is_column_selected = false
     }
 
     changeShadow(amount) {
-        const cell_background_color = this.element.style.backgroundColor
-        let alpha
-        if (cell_background_color !== "") {
-            alpha = cell_background_color.match(/[0-9.]+\)$/)[0].slice(0, -1)
-        } else {
-            alpha = 0
-        }
-        alpha = parseFloat(alpha) + amount
-        this.element.style.backgroundColor = "rgba(20, 20, 50, " + alpha + ")"
+    const cell_background_color = this.element.style.backgroundColor
+    let alpha
+    if (cell_background_color !== "") {
+        alpha = cell_background_color.match(/[0-9.]+\)$/)[0].slice(0, -1)
+    } else {
+        alpha = 0
+    }
+    alpha = parseFloat(alpha) + amount
+    this.element.style.backgroundColor = "rgba(20, 20, 50, " + alpha + ")"
     }
 
     getRelatedCell(add_to_x, add_to_y) {
@@ -110,27 +112,58 @@ class Textarea {
     }
 }
 
-const CELLS = document.querySelectorAll(".crossword-cell")
-let CELL_POINTER = 0
+function checkIfSolved() {
+    let fully_solved = true
+    let solved = true
+    for (let i = 0; i < TEXTAREAS.length; ++i) {
+        if (TEXTAREAS[i].element.value !== TEXTAREAS[i].solution) {
+            fully_solved = false
+            if (TEXTAREAS[i].is_solution_cell) {
+                solved = false
+                return "no"
+            }
+        }
+    }
+    if (fully_solved) {
+        return "fully_solved"
+    }
+    if (solved) {
+        return "solved"
+    }
+}
+
+const CELLS = Array.from(document.querySelectorAll(".crossword-cell"))
 
 let TEXTAREAS = []
+const ALL_SOLUTIONS = ['J', 'N', 'A', 'Z', 'J', 'O', 'S', 'E', 'P', 'H', 'D', 'A', 'S', 'N', 'E', 'S', 'O', 'N', 'P', 'B', 'A', 'G', 'B', 'Y', 'C', 'A', 'I', 'S', 'A', 'A', 'C', 'E', 'A', 'L', 'F', 'A', 'D', 'U', 'M', 'B', 'A', 'S', 'S', 'E', 'S', 'A', 'O', 'R', 'I', 'O', 'N', 'R', 'H', 'O', 'D', 'E', 'C', 'T', 'T', 'I', 'R', 'E', 'S', 'O', 'M', 'E']
+const SOLUTION_POSITIONS = [{x: 7, y: 1}, {x: 6, y: 2}, {x: 6, y: 3}, {x: 6, y: 4}, {x: 6, y: 5}, {x: 6, y: 6}, {x: 6, y: 7}, {x: 1, y: 8}, {x: 2, y: 8}, {x: 3, y: 8}, {x: 4, y: 8}, {x: 5, y: 8}]
 for (let y = 0; y < 5; y++) {
     for (let x = 5; x < 15; x++) {
-        const cell = CELLS[CELL_POINTER]
-        CELL_POINTER++
+        const cell = CELLS.shift()
         const textarea = cell.querySelector("textarea")
         if (textarea !== null) {
-            TEXTAREAS.push(new Textarea(textarea, x, y))
+            TEXTAREAS.push(new Textarea(
+                textarea,
+                x,
+                y,
+                ALL_SOLUTIONS.shift(),
+                SOLUTION_POSITIONS.some(object => { return (object.x === x) && (object.y === y) }
+            )))
         }
     }
 }
 for (let y = 5; y < 10; y++) {
     for (let x = 0; x < 10; x++) {
-        const cell = CELLS[CELL_POINTER]
-        CELL_POINTER++
+        const cell = CELLS.shift()
         const textarea = cell.querySelector("textarea")
         if (textarea !== null) {
-            TEXTAREAS.push(new Textarea(textarea, x, y))
+            TEXTAREAS.push(new Textarea(
+                textarea,
+                x,
+                y,
+                ALL_SOLUTIONS.shift(),
+                SOLUTION_POSITIONS.some(object => { return (object.x === x) && (object.y === y) }
+            )))
         }
     }
 }
@@ -230,5 +263,14 @@ for (const textarea of TEXTAREAS) {
                 next_column.element.focus()
             }     
         }
+        switch (checkIfSolved()) {
+            case "solved": 
+                alert("solved!")
+                break
+            case "fully_solved":
+                alert("fully solved!")
+                break    
+        }
+
     })
 }
