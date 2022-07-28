@@ -183,6 +183,16 @@ for (const textarea of TEXTAREAS) {
     textarea.element.addEventListener("keydown", (event) => {
         const key = event.key.toUpperCase()
         event.preventDefault()
+        const callback = {
+            "ARROWLEFT": [-1, 0],
+            "ARROWRIGHT": [1, 0],
+            "ARROWUP": [0, -1],
+            "ARROWDOWN": [0, 1],
+        }[key]
+        const adjacent_cell = textarea.getRelatedCell(callback[0], callback[1])
+            if (adjacent_cell) {
+                adjacent_cell.element.focus()
+            }
         if (key === "BACKSPACE") {
             if (textarea.element.value === "") {
                 if (WRITE_DIRECTION === "row") {
