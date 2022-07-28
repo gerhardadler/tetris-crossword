@@ -1,3 +1,5 @@
+// Yes, I know this code is awful... It was thrown together quickly
+
 class EditCell {
     constructor(element, x, y, solution, is_solution_cell) {
         this.element = element
@@ -135,6 +137,7 @@ function checkIfSolved() {
 const CELLS = Array.from(document.querySelectorAll(".crossword-cell"))
 
 let EDITCELLS = []
+// Don't cheat!
 const ALL_SOLUTIONS = ['J', 'N', 'A', 'Z', 'J', 'O', 'S', 'E', 'P', 'H', 'D', 'A', 'S', 'N', 'E', 'S', 'O', 'N', 'P', 'B', 'A', 'G', 'B', 'Y', 'C', 'A', 'I', 'S', 'A', 'A', 'C', 'E', 'A', 'L', 'F', 'A', 'D', 'U', 'M', 'B', 'A', 'S', 'S', 'E', 'S', 'A', 'O', 'R', 'I', 'O', 'N', 'R', 'H', 'O', 'D', 'E', 'C', 'T', 'T', 'I', 'R', 'E', 'S', 'O', 'M', 'E']
 const SOLUTION_POSITIONS = [{x: 7, y: 1}, {x: 6, y: 2}, {x: 6, y: 3}, {x: 6, y: 4}, {x: 6, y: 5}, {x: 6, y: 6}, {x: 6, y: 7}, {x: 1, y: 8}, {x: 2, y: 8}, {x: 3, y: 8}, {x: 4, y: 8}, {x: 5, y: 8}]
 for (let y = 0; y < 5; y++) {
@@ -267,12 +270,20 @@ for (const editcell of EDITCELLS) {
         }
         switch (checkIfSolved()) {
             case "solved": 
-                alert("solved!")
+                console.log("hey")
                 break
             case "fully_solved":
-                alert("fully solved!")
+                const popup = document.getElementById("popup")
+                popup.style.visibility = "visible"
+                popup.style.opacity = "1"
                 break    
         }
 
     })
 }
+
+const popup = document.getElementById("popup")
+popup.addEventListener("click", () => {
+    popup.style.visibility = "hidden"
+    popup.style.opacity = "0"
+})

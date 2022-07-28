@@ -144,11 +144,19 @@
                 <div class="crossword-cell"><svg id="a" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"><defs><style>.b{fill:none;stroke:#1d1d1b;stroke-width:var(--outline-width);stroke-miterlimit:10;}</style></defs><polyline class="b" vector-effect="non-scaling-stroke" points="0 2 1 2 1 1 3 1 3 0 3 3 4 3 4 2 5 2 5 1 4 1 4 0 4 1 5 1 5 2 7 2 7 1 6 1 6 0 6 1 7 1 7 3 8 3 7 3 7 2 6 2 6 5 7 5 7 4 8 4 7 4 7 8 7 7 6 7 6 6 5 6 5 7 4 7 4 8 4 7 0 7 3 7 3 6 1 6 1 5 0 5 1 5 1 6 2 6 2 1 2 4 1 4 1 3 0 3 1 3 1 4 4 4 4 3 4 4 6 4 5 4 5 6 5 5 3 5 3 6"/></svg></div>
             </div>
         </div>
-        <h2>How to solve?</h2>
-        <p>This is a swedish style crossword. The point of a crossword is to fill in all the blank cells with letters. One letter per cell. There are clues dotted around the crossword. If the clue has an arrow coming out of it, it's solution should follow the arrow. Elsewise the solution goes to the right of the cell. If there is one or zero spaces on the right of the cell, the solution goes downwards. In a cell with two clues, the top cell goes left, while the bottom cell goes downwards. (Unless there are arrows) The cells with a Tetris pattern do nothing.</p>
-        <p>The gray cells indicate the solution of the crossword. The big arrows show the direction of the solution. But it would be great if you managed to solve the entire crossword!</p>
-        <p>Click on an empty cell, and write with your keyboard to get started! If you're on mobile, take advantage of zooming in!</p>
-        <p>Good luck!</p>
+        <section class="how-to-solve">
+            <h2>How to solve?</h2>
+            <p>This is a swedish style crossword. The point of a crossword is to fill in all the blank cells with letters. One letter per cell. There are clues dotted around the crossword. If the clue has an arrow coming out of it, it's solution should follow the arrow. Elsewise the solution goes to the right of the cell. If there is one or zero spaces on the right of the cell, the solution goes downwards. In a cell with two clues, the top cell goes left, while the bottom cell goes downwards. (Unless there are arrows) The cells with a Tetris pattern do nothing.</p>
+            <p>The gray cells indicate the solution of the crossword. The big arrows show the direction of the solution. But it would be great if you managed to solve the entire crossword!</p>
+            <p>Click on an empty cell, and write with your keyboard to get started! If you're on mobile, take advantage of zooming in!</p>
+            <p>Good luck!</p>
+        </section>
+        <div id="popup" tabindex="0">
+            <section class="popup-text">
+                <h2>Congrats!</h2>
+                <h3>You solved the<br>crossword!</h3>
+            </section>
+        </div>
     </section>
 </body>
 </html>
