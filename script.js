@@ -183,16 +183,18 @@ for (const textarea of TEXTAREAS) {
     textarea.element.addEventListener("keydown", (event) => {
         const key = event.key.toUpperCase()
         event.preventDefault()
-        const callback = {
+        const direction = {
             "ARROWLEFT": [-1, 0],
             "ARROWRIGHT": [1, 0],
             "ARROWUP": [0, -1],
-            "ARROWDOWN": [0, 1],
+            "ARROWDOWN": [0, 1]
         }[key]
-        const adjacent_cell = textarea.getRelatedCell(callback[0], callback[1])
+        if (direction) {
+            const adjacent_cell = textarea.getRelatedCell(direction[0], direction[1])
             if (adjacent_cell) {
                 adjacent_cell.element.focus()
             }
+        }
         if (key === "BACKSPACE") {
             if (textarea.element.value === "") {
                 if (WRITE_DIRECTION === "row") {
@@ -230,14 +232,3 @@ for (const textarea of TEXTAREAS) {
         }
     })
 }
-
-// const textareas = document.querySelectorAll(".crossword-cell textarea")
-// const solutions = ['J', 'N', 'A', 'Z', 'J', 'O', 'S', 'E', 'P', 'H', 'D', 'A', 'S', 'N', 'E', 'S', 'O', 'N', 'P', 'B', 'A', 'G', 'B', 'Y', 'C', 'A', 'I', 'S', 'A', 'A', 'C', 'E', 'A', 'L', 'F', 'A', 'D', 'U', 'M', 'B', 'A', 'S', 'S', 'E', 'S', 'A', 'O', 'R', 'I', 'O', 'N', 'R', 'H', 'O', 'D', 'E', 'C', 'T', 'T', 'I', 'R', 'E', 'S', 'O', 'M', 'E']
-// window.addEventListener("keyup", (event) => {
-//     for (let i = 0; i < textareas.length; ++i) {
-//         if (textareas[i].value.toUpperCase() != solutions[i]) {
-//             return
-//         }
-//     }
-//     alert("bean")
-// })
