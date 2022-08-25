@@ -1,2 +1,4 @@
 # tetris-crossword
-This is a small webpage for a NES Tetris crossword
+This is a webpage for a NES Tetris crossword
+
+You can check it out here: gerhardadler.no/tetris_crossword/
